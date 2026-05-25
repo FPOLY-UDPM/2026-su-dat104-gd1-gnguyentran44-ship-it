@@ -1,0 +1,34 @@
+SELECT * FROM DonDatHang;USE Lab3;
+GO
+
+SELECT *
+FROM dbo.KhachHang
+WHERE TenKhachHang LIKE 'W%'   -- tên bắt đầu bằng W
+   OR TenKhachHang LIKE '%a';  -- tên kết thúc bằng a
+
+
+SELECT *
+FROM dbo.SanPham
+WHERE NamSanXuat = 2018   -- sản xuất năm 2018
+  AND Gia > 1000;         -- giá lớn hơn 1000
+
+  SELECT TOP 1 
+    YEAR(NgayDatHang) AS [Năm],
+    MONTH(NgayDatHang) AS [Tháng],
+    COUNT(MaDon) AS [Số lượng đơn hàng]
+FROM 
+    DonDatHang
+WHERE 
+    NgayDatHang BETWEEN '2016-02-01' AND '2017-02-28'
+GROUP BY 
+    YEAR(NgayDatHang), 
+    MONTH(NgayDatHang)
+ORDER BY 
+    [Số lượng đơn hàng] DESC;
+
+
+
+
+
+
+
