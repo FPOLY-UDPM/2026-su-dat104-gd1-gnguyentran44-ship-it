@@ -64,11 +64,21 @@ SELECT o.OrderID, o.OrderDate, e.FirstName + ' ' + e.LastName AS TenNhanVien
 FROM Orders o
 JOIN Employees e ON o.EmployeeID = e.EmployeeID;
 --Thông tin nhân viên và người quản lý
+
 SELECT e.FirstName + ' ' + e.LastName AS TenNhanVien,
        m.FirstName + ' ' + m.LastName AS TenQuanLy
 FROM Employees e
 LEFT JOIN Employees m ON e.ReportsTo = m.EmployeeID;
 --Thông tin nhân viên, và đi làm năm bao nhiêu tuổi
+
 SELECT e.FirstName + ' ' + e.LastName AS TenNhanVien,
        YEAR(e.HireDate) - YEAR(e.BirthDate) AS TuoiKhiDiLam
 FROM Employees e;
+
+SELECT 
+    o.order_id,
+    SUM(od.quantity * od.list_price * (1 - od.discount)) AS TongTien
+FROM sales.orders o
+JOIN sales.order_items od ON o.order_id = od.order_id
+GROUP BY o.order_id;
+
